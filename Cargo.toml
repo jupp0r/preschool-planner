@@ -1,8 +1,10 @@
 [package]
 name = "preschool-planner"
 version = "0.1.0"
-authors = ["Jupp Müller <jupp0r@gmail.com>"]
+authors = ["Jupp Mueller <jupp0r@gmail.com>"]
 
 [dependencies]
 csv = "1"
 serde_derive = "1"
+serde = "1"
+failure = "0.1.2"
