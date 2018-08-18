@@ -11,6 +11,7 @@ pub struct Parent {
     pub name: String,
     pub first_work_preferences: Vec<Weekday>,
     pub second_work_preferences: Vec<Weekday>,
+    pub anti_preferences: Vec<Weekday>,
     pub children: Vec<Child>,
     pub is_experienced: bool,
 }
@@ -50,6 +51,7 @@ impl From<Record> for Parent {
                 .filter_map(|e| e.map(|v| v.into()))
                 .collect(),
             is_experienced: record.experienced_parent.into(),
+            anti_preferences: record.anti_preference_parent.into_iter().map(|e| e.into()).collect(),
             children: {
                 let mut ch = vec![Child {
                     first_caredfor_preferences: vec![
@@ -111,4 +113,18 @@ impl From<InputWeekday> for Weekday {
             InputWeekday::Fri => Weekday::Friday,
         }
     }
+}
+
+pub struct Schedule {
+    pub monday: DaySchedule,
+    pub tuesday: DaySchedule,
+    pub wednesday: DaySchedule,
+    pub thursday: DaySchedule,
+    pub friday: DaySchedule,
+}
+
+pub struct DaySchedule {
+    pub weekday: Weekday,
+    pub parents: Vec<Parent>,
+    pub children: Vec<Child>,
 }
